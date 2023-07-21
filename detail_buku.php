@@ -46,6 +46,7 @@ if ($dataBuku['status'] == 'Berhasil') {
     <title><?= $judul ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -64,6 +65,9 @@ if ($dataBuku['status'] == 'Berhasil') {
             </div>
         </div>
     </div>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
 </body>
 
 </html>
