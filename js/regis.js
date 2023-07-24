@@ -91,6 +91,7 @@ $(document).ready(function () {
           password: password,
         },
         success: function (response) {
+          console.log("Status : ");
           // Tanggapan dari server, Anda dapat menangani respons sesuai kebutuhan
           if(response.status === 'Failed') {
             $("#errorRegisMessage").html(
@@ -101,6 +102,7 @@ $(document).ready(function () {
           }
         },
         error: function (xhr, status, error) {
+          console.log("yuhuuuu");
           // Tanggapan kesalahan dari server, Anda dapat menangani kesalahan sesuai kebutuhan
           console.error(error);
         },
