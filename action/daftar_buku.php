@@ -10,7 +10,7 @@ if (isset($_GET['id'])) {
     $kategori = $_GET['kategori'];
     // Query untuk mendapatkan daftar data buku
     $query = "SELECT * FROM books WHERE id_kategori = '$kategori'";
-}else if (isset($_GET['key'])) {
+} else if (isset($_GET['key'])) {
     $key = $_GET['key'];
     // Query untuk mendapatkan daftar data buku
     $query = "SELECT * FROM books WHERE judul LIKE '%$key%'";
@@ -43,6 +43,19 @@ curl_close($ch);
 
 $dataAuthor = json_decode($author, true);
 
+function getDataAPI($id)
+{
+    $ch = curl_init();
+    $api_url = 'http://localhost/detikcom/action/getDataPengguna.php?id='.$id;
+    curl_setopt($ch, CURLOPT_URL, $api_url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $pengguna = curl_exec($ch);
+    curl_close($ch);
+
+    $data = json_decode($pengguna, true);
+    return $data['data'];
+}
+
 if (mysqli_num_rows($result) > 0) {
     $dataBuku["data"] = array();
     $dataBuku["status"] = "Berhasil";
@@ -53,10 +66,13 @@ if (mysqli_num_rows($result) > 0) {
             }
         }
         foreach ($dataAuthor as $daftarAuthor) {
-            if ($daftarAuthor['id_pengguna'] === $x['id']) {
-                $author = $daftarAuthor['id_pengguna'];
+            if ($daftarAuthor['id_buku'] === $x['id']) {
+                $id_author = $daftarAuthor['id_pengguna'];
+                $author = array();
+                $author = getDataAPI($id_author);
             }
         }
+        $h['id_author'] = $id_author;
         $h['author'] = $author;
         $h['kategori'] = $kategori;
         $h['id'] = $x["id"];
