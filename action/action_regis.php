@@ -22,13 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $query = mysqli_query($koneksi, "INSERT INTO users (nama, email, `password`, `role`) VALUES ('$nama', '$email', '$password', 'user')");
         if ($query) {
 
-            // Mendapatkan data pengguna dari hasil query
-            $user = $query->fetch_assoc();
+            $query = mysqli_query($koneksi, "SELECT id FROM users WHERE email = '$email'");
+            $id = mysqli_fetch_assoc($query);
 
-            // Menyimpan data pengguna ke dalam session
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_role'] = $user['role'];
-            // Menambahkan data pengguna ke dalam respons
+            $_SESSION['user_id'] = $id['id'];
+            $_SESSION['user_role'] = "user";
+            $_SESSION['nama_pengguna'] = $nama;
+            $_SESSION['email_pengguna'] = $email;
             $response['status'] = 'success';
         } else {
             $response['status'] = "Failed";
