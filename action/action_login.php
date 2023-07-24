@@ -19,6 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Menyimpan data pengguna ke dalam session
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_role'] = $user['role'];
+        $_SESSION['nama_pengguna'] = $user['nama'];
+        $_SESSION['email_pengguna'] = $user['email'];
         
         $response['status'] = 'success';
     } else {
